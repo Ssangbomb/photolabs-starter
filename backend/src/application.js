@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
+const db = require('./db/index')
 const express = require("express");
 const bodyparser = require("body-parser");
 const helmet = require("helmet");
@@ -32,10 +32,11 @@ module.exports = function application(
   app.use(cors());
   app.use(helmet());
   app.use(bodyparser.json());
+  app.use(express.static(path.join(__dirname, "public")));
 
   // TODO: update to topics and photos
-  app.use("/api", photos());
-  app.use("/api", topics());
+  app.use("/api", photos(db));
+  app.use("/api", topics(db));
 
   if (ENV === "development" || ENV === "test") {
     Promise.all([

@@ -1,34 +1,29 @@
 import React from 'react';
-
+import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
-const PhotoList = () => {
-  <ul className="photo-list">
-    {/* Insert React */}
-  </ul>
-}
+const PhotoList = (props) => {
+  const mappedPhotos = props.photos.map((photo) => {
+    return <PhotoListItem 
+    key={photo.id}
+    similar_photos={photo.similar_photos}
+    username={photo.user.username} 
+    profile={photo.user.profile}
+    imagefullsource={photo.urls.full}
+    imageSource={photo.urls.regular}
+    city={photo.location.city} 
 
-PhotoList.defaultProps = {
-  photos: [
-    {
-     username: 'Jacob',
-     imageSource: `${process.env.PUBLIC_URL}/Image.jpg`,
-     id: 1,
-     hideUserName: false,
-    },
-    {
-     username: 'Jacob',
-     imageSource: `${process.env.PUBLIC_URL}/Image.jpg`,
-     id: 2,
-     hideUserName: false,
-    },
-    {
-     username: 'Jacob',
-     imageSource: `${process.env.PUBLIC_URL}/Image.jpg`,
-     id: 3,
-     hideUserName: false,
-    }
-   ]
+    dispatch={props.dispatch}
+    showmodal={props.showmodal}
+    detailphoto={props.detailphoto}
+    />
+  })
+  
+  return (
+    <ul className="photo-list">
+      { mappedPhotos }
+   </ul>
+  )
 }
 
 export default PhotoList
