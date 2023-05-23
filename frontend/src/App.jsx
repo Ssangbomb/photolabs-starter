@@ -11,6 +11,9 @@ const App = () => {
   const [photos, setPhotos] = useState([]);
   const [topics, setTopics] = useState([]);
   const [modal, setModal] = useState(false);
+  const [searchTerm, setSerchTerm] = useState('');
+
+  
   
   const openitem = (id) => {
     fetch(`/api/topics/photos/${id}`)
@@ -37,6 +40,20 @@ const App = () => {
     setModal(false);
   }
 
+  const handleChange = (event) => {
+    event.preventDefault();
+    setSerchTerm(event.target.value);
+  };
+  
+  const filterPhoto = photos.filter((photo) => {
+    const username = photo.user.username;
+    const city = photo.location.city
+    if (username.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return photo
+    } else if (city.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return photo
+    }
+  })
 
   const [
     state,
@@ -54,7 +71,9 @@ const App = () => {
       closemodal={closeModal}
     />}
     <HomeRoute 
-      photos={photos} 
+      photos={filterPhoto} 
+      handlechange={handleChange}
+      searchterm={searchTerm}
       topics={topics}
       openitem={openitem}
       showmodal={showModal}
