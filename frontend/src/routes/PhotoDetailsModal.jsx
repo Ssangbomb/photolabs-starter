@@ -5,7 +5,6 @@ import PhotoListItem from '../components/PhotoListItem';
 import '../styles/PhotoListItem.scss';
 
 export const PhotoDetailsModal = (props) => {
-  console.log(props)
   const mappedPhotos = props.photoDetail.similar_photos.map((photo) => {
     return <PhotoListItem 
     key={photo.id}
