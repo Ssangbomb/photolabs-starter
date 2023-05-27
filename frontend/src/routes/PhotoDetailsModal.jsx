@@ -38,7 +38,7 @@ export const PhotoDetailsModal = (props) => {
       </div>
       <div >
         <PhotoFavButton dispatch={props.dispatch}/>
-        <img src={props.photoDetail.imageSource} className='.photo-details-modal--image'/>
+        <img src={props.photoDetail.imagefullsource} className='.photo-details-modal--image'/>
         <div className='photo-details-modal--photographer-details'>
         <div className='photo-list--user-details'>
           <img src={props.photoDetail.profile} className='photo-list--user-profile'/>
