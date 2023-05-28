@@ -5,8 +5,6 @@ import PhotoListItem from '../components/PhotoListItem';
 import '../styles/PhotoListItem.scss';
 
 export const PhotoDetailsModal = (props) => {
-  console.log(props.photoData)
-
   const isFavorite = props.favorites.includes(props.id)
   const setIsFavorite = () => {
     props.toggleFavorite(props.id)
