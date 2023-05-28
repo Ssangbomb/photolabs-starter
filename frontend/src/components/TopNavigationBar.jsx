@@ -3,7 +3,7 @@ import TopicList from './TopicList';
 import FavBadge from './FavBadge';
 import '../styles/TopNavigationBar.scss'
 
-const TopNavigation = (props) => {  
+const TopNavigation = (props) => {
   return (
     <div className="top-nav-bar">
       

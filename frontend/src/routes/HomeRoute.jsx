@@ -9,7 +9,7 @@ const HomeRoute = (props) => {
       <TopNavigationBar 
         topics={props.topics} 
         openitem={props.openitem} 
-        isFavPhotoExist={props.favorites} 
+        isFavPhotoExist={props.favorites.length} 
         searchterm={props.searchterm}
         handlechange={props.handlechange}
       />
