@@ -9,15 +9,16 @@ const HomeRoute = (props) => {
       <TopNavigationBar 
         topics={props.topics} 
         openitem={props.openitem} 
-        isFavPhotoExist={props.state} 
+        isFavPhotoExist={props.favorites} 
         searchterm={props.searchterm}
         handlechange={props.handlechange}
       />
       <PhotoList
         photos={props.photos}
-        dispatch={props.dispatch}
-        showmodal={props.showmodal}
-        detailphoto={props.detailphoto}
+        openPhoto={props.openPhoto}
+        toggleFavorite={props.toggleFavorite}
+        favorites={props.favorites}
+        showModal={props.showModal}
       />
     </div>
   );

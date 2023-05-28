@@ -10,7 +10,7 @@ import useApplicationData from './hooks/useApplicationData';
 const App = () => {
   const [photos, setPhotos] = useState([]);
   const [topics, setTopics] = useState([]);
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const [searchTerm, setSerchTerm] = useState('');
 
   
@@ -32,14 +32,6 @@ const App = () => {
       .then(data => { setTopics([...data])})
   }, []);
 
-  const showModal = () => {
-    setModal(true);
-  }
-
-  const closeModal = () => {
-    setModal(false);
-  }
-
   const handleChange = (event) => {
     event.preventDefault();
     setSerchTerm(event.target.value);
@@ -55,20 +47,28 @@ const App = () => {
     }
   })
 
-  const [
+  const {
     state,
-    dispatch,
-    detailPhoto,
-    photoDetail
-  ] = useApplicationData();
+    toggleFavorite,
+    setPhotoData,
+    closePhoto,
+  } = useApplicationData(); 
 
+  const openPhoto = (id) => {
+    const singlePhoto = photos.find((photo) => {
+      return photo.id === id;
+    })
+    setPhotoData(singlePhoto);
+  } 
+  console.log(state.showModal);
   return(
   <div className="App">
-    {modal && <PhotoDetailModal
-      dispatch={dispatch}
-      photos={photos} 
-      photoDetail={photoDetail}
-      closemodal={closeModal}
+    {state.showModal && <PhotoDetailModal
+      photoData={state.photoData}
+      toggleFavorite={toggleFavorite}
+      closePhoto={closePhoto}
+      favorites={state.favorites}
+      openPhoto={openPhoto}
     />}
     <HomeRoute 
       photos={filterPhoto} 
@@ -76,10 +76,10 @@ const App = () => {
       searchterm={searchTerm}
       topics={topics}
       openitem={openitem}
-      showmodal={showModal}
-      detailphoto={detailPhoto}
-      dispatch={dispatch}
-      state={state}
+      toggleFavorite={toggleFavorite}
+      openPhoto={openPhoto}
+      favorites={state.favorites}
+      showModal={state.showModal}
     />
   </div>
   )

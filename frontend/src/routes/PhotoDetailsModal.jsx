@@ -5,18 +5,24 @@ import PhotoListItem from '../components/PhotoListItem';
 import '../styles/PhotoListItem.scss';
 
 export const PhotoDetailsModal = (props) => {
-  const mappedPhotos = props.photoDetail.similar_photos.map((photo) => {
+  const mappedPhotos = props.photoData.similar_photos.map((photo) => {
     return <PhotoListItem 
     key={photo.id}
+    id={photo.id}
+    similar_photos={photo.similar_photos}
     username={photo.user.username} 
     profile={photo.user.profile}
     imagefullsource={photo.urls.full}
     imageSource={photo.urls.regular}
     city={photo.location.city} 
+
+    openPhoto={props.openPhoto}
+    toggleFavorite={props.toggleFavorite}
+    favorites={props.favorites}
     />
   })
   const handleClick = () => {
-    props.closemodal({type: "CLOSE_PHOTO"})
+    props.closePhoto()
   }
   return (
     <div className='photo-details-modal'>
@@ -36,14 +42,29 @@ export const PhotoDetailsModal = (props) => {
         </button>
       </div>
       <div >
-        <PhotoFavButton dispatch={props.dispatch}/>
-        <img src={props.photoDetail.imagefullsource} className='.photo-details-modal--image'/>
+        <div className='.photo-details-modal--image'>
+          <PhotoListItem 
+            key={props.photoData.id}
+            id={props.photoData.id}
+            similar_photos={props.photoData.similar_photos}
+            username={props.photoData.user.username} 
+            profile={props.photoData.user.profile}
+            imagefullsource={props.photoData.urls.full}
+            imageSource={props.photoData.urls.regular}
+            city={props.photoData.location.city} 
+        
+            openPhoto={props.openPhoto}
+            toggleFavorite={props.toggleFavorite}
+            favorites={props.favorites}
+          />
+        </div>
+        <img src={props.photoData.imagefullsource} />
         <div className='photo-details-modal--photographer-details'>
         <div className='photo-list--user-details'>
-          <img src={props.photoDetail.profile} className='photo-list--user-profile'/>
+          <img src={props.photoData.profile} className='photo-list--user-profile'/>
           <div>
-            <div className='.photo-list--user-info'>{ props.photoDetail.username }</div>
-            <div className='photo-list--user-location '>{ props.photoDetail.country }</div>
+            <div className='.photo-list--user-info'>{ props.photoData.username }</div>
+            <div className='photo-list--user-location '>{ props.photoData.country }</div>
           </div>
         </div>
         </div>

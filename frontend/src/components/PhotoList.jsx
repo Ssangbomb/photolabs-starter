@@ -6,6 +6,7 @@ const PhotoList = (props) => {
   const mappedPhotos = props.photos.map((photo) => {
     return <PhotoListItem 
     key={photo.id}
+    id={photo.id}
     similar_photos={photo.similar_photos}
     username={photo.user.username} 
     profile={photo.user.profile}
@@ -13,9 +14,10 @@ const PhotoList = (props) => {
     imageSource={photo.urls.regular}
     city={photo.location.city} 
 
-    dispatch={props.dispatch}
-    showmodal={props.showmodal}
-    detailphoto={props.detailphoto}
+    openPhoto={props.openPhoto}
+    toggleFavorite={props.toggleFavorite}
+    favorites={props.favorites}
+    showModal={props.showModal}
     />
   })
   
