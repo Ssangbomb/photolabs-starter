@@ -17,7 +17,7 @@ function reducer(state, action) {
     case ACTIONS.SELECT_PHOTO:
       return {...state, showModal: !state.showModal};
     case ACTIONS.CLOSE_PHOTO:
-      return {...state, showModal: state.showModal};
+      return {...state, showModal: !state.showModal};
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -47,6 +47,10 @@ export default function useApplicationData  () {
     dispatch({type: ACTIONS.SET_PHOTO_DATA, payload: photoData});
   }
 
+  const selectPhoto = () => {
+    dispatch({type: ACTIONS.SELECT_PHOTO})
+  }
+
   const closePhoto = () => {
     dispatch({type: ACTIONS.CLOSE_PHOTO})
   }
@@ -54,7 +58,8 @@ export default function useApplicationData  () {
     state, 
     toggleFavorite,
     setPhotoData,
-    closePhoto
+    closePhoto,
+    selectPhoto
   }
 }
 

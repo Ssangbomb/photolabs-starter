@@ -58,3 +58,9 @@
   margin-bottom: 24px;
   width: 90%;
 }
+
+.photo-list--fullimage {
+  user-select: none;
+  width: 80%;
+  object-fit: cover;
+}

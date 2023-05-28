@@ -52,6 +52,7 @@ const App = () => {
     toggleFavorite,
     setPhotoData,
     closePhoto,
+    selectPhoto
   } = useApplicationData(); 
 
   const openPhoto = (id) => {
@@ -59,8 +60,8 @@ const App = () => {
       return photo.id === id;
     })
     setPhotoData(singlePhoto);
+    selectPhoto();
   } 
-  console.log(state.showModal);
   return(
   <div className="App">
     {state.showModal && <PhotoDetailModal

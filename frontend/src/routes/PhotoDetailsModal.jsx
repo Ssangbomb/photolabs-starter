@@ -5,6 +5,13 @@ import PhotoListItem from '../components/PhotoListItem';
 import '../styles/PhotoListItem.scss';
 
 export const PhotoDetailsModal = (props) => {
+  console.log(props.photoData)
+
+  const isFavorite = props.favorites.includes(props.id)
+  const setIsFavorite = () => {
+    props.toggleFavorite(props.id)
+  }
+
   const mappedPhotos = props.photoData.similar_photos.map((photo) => {
     return <PhotoListItem 
     key={photo.id}
@@ -43,28 +50,15 @@ export const PhotoDetailsModal = (props) => {
       </div>
       <div >
         <div className='.photo-details-modal--image'>
-          <PhotoListItem 
-            key={props.photoData.id}
-            id={props.photoData.id}
-            similar_photos={props.photoData.similar_photos}
-            username={props.photoData.user.username} 
-            profile={props.photoData.user.profile}
-            imagefullsource={props.photoData.urls.full}
-            imageSource={props.photoData.urls.regular}
-            city={props.photoData.location.city} 
-        
-            openPhoto={props.openPhoto}
-            toggleFavorite={props.toggleFavorite}
-            favorites={props.favorites}
-          />
+          <PhotoFavButton setIsFavorite={setIsFavorite} isFavorite={isFavorite}/>
+          <img src={props.photoData.urls.full} className='photo-list--fullimage' />
         </div>
-        <img src={props.photoData.imagefullsource} />
         <div className='photo-details-modal--photographer-details'>
         <div className='photo-list--user-details'>
-          <img src={props.photoData.profile} className='photo-list--user-profile'/>
+          <img src={props.photoData.user.profile} className='photo-list--user-profile'/>
           <div>
-            <div className='.photo-list--user-info'>{ props.photoData.username }</div>
-            <div className='photo-list--user-location '>{ props.photoData.country }</div>
+            <div className='.photo-list--user-info'>{ props.photoData.user.name }</div>
+            <div className='photo-list--user-location '>{ props.photoData.user.country }</div>
           </div>
         </div>
         </div>
